@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Welcome to Code Generator App:</h1>
+        <hr>
+
+        <form method="post">
+            <h2>Create Qr Code:</h2>
+            {% csrf_token %}
+            <label for="url">Enter QRCODE NAME:</label>
+            <input type="text" name="qrcode_name">
+            <br>
+            <label for="url">Enter URL:</label>
+            <input type="text" name="qrcode_url" required>
+            <br>
+            <button type="submit">Generate QR Code</button>
+        </form>
+
+        <section class="qrcode">
+            <h2>Your Qr Codes:</h2>
+            {% for dt in data %}
+                <div class="box">
+                    <h3 id="qr_codename">{{dt.name}}</h3>
+                    <h3 id="qr_codeurl">QRCODE To <a href="{{dt.url}}">{{dt.name}}</a></h3>
+                    <img id="qrcode_img" src="{{dt.qr_code_image.url}}" alt="">
+                </div>
+            {% endfor %}
+        </section>
+
+    </body>
+</html>
+<style>
+    body {
+        font-family: sans-serif;
+    }
+    input {
+        margin-top: 10px;
+    }
+    button {
+        padding: 1em;
+        border-radius: 3px;
+        border: none;
+        color: white;
+        background-color: rgb(255, 0, 179);
+        margin-top: 10px;
+    }
+
+    form {
+        border: 1px solid #333333;
+        padding: 20px;
+    }
+
+    /* Qr Code Section */
+    section.qrcode {
+        border: 1px solid #333333;
+        margin-top: 1em;
+        padding: 20px;
+    }
+
+    section.qrcode .box{
+        border: 1px solid red;
+        display: inline-block;
+        padding: 10px;
+    }
+
+
+    section.qrcode > h2 {
+        color: rgb(36, 31, 34);
+    }
+
+    section.qrcode #qr_codename , #qr_codeurl{
+        font-size: 16px;
+        color: #333333e8;
+    }
+
+    section.qrcode #qrcode_img{
+        border: 2px solid #333333c5;
+        width: 200px;
+    }
+
+</style>
