@@ -1,5 +1,5 @@
 from django.shortcuts import render , redirect
-from django.http import HttpResponse
+from django.http import HttpResponse , JsonResponse
 from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate , login , logout
 from .forms import CreateUserForm
@@ -12,7 +12,7 @@ from .decorators import *
 import qrcode
 from io import BytesIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
-
+import json
 
 
 @userAuthenticated
@@ -94,3 +94,45 @@ def homePage(request):
             return redirect('homePage')
     context = {"data":userQrCode}
     return render(request, 'home.html',context=context)
+
+
+
+
+
+def qr_code_api(request):
+    if request.method == 'POST':
+        qrcode_name = request.POST.get('qrcode_name')
+        qrcode_url_submitted = request.POST.get('qrcode_url')
+
+        if qrcode_url_submitted:
+            qr = qrcode.QRCode(version=1, box_size=10, border=5)
+            qr.add_data(qrcode_url_submitted)
+            qr.make(fit=True)
+            img = qr.make_image(fill_color='black', back_color='white')
+
+            # Create a QrCodeModel object and save it to the database
+            qr_code_obj = QrCodeModel(name=qrcode_name, user=user, url=qrcode_url_submitted)
+            qr_code_obj.save()
+
+            # Save the qr_code_image field after the instance is saved
+            qr_code_img_io = BytesIO()
+            img.save(qr_code_img_io, format='PNG')
+            qr_code_img = InMemoryUploadedFile(
+                qr_code_img_io, None, f"{qrcode_name}.png", 'image/png',
+                qr_code_img_io.getbuffer().nbytes, None, None
+            )
+            qr_code_obj.qr_code_image.save(f"{qrcode_name}.png", qr_code_img, save=True)
+
+
+
+            data_response = {
+                "name": qrcode_name,
+                "url": qrcode_url_submitted,
+                "image": qr_code_obj.qr_code_image.url
+            }
+            return JsonResponse(json.dumps(data_response), content_type='application/json')
+    return HttpResponse("test QrCode API")
+
+
+
+
