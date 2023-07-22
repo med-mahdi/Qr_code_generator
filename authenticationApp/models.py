@@ -33,7 +33,7 @@ class UserProfile(models.Model):
 
 class QrCodeModel(models.Model):
     name = models.CharField(max_length=100)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     url = models.URLField()
     qr_code_image = models.ImageField(upload_to='qr_codes/')
     
