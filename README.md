@@ -4,7 +4,7 @@ QrCode Generator Website For generating public URLS to Qr Code
 ## To Create A QRCODE Follow This:
 > Register > Login > Home (to generate The Qr codes)
 
-### To create QR Code using a Get Request:
+## To create QR Code using a Get Request:
   #### Make a Get Api Call To This Url:
   #### Change The Variables(qrcode_name,website_url) Below to Valid Input:
   ```
