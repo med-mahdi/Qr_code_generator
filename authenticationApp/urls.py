@@ -7,5 +7,5 @@ urlpatterns = [
     path('login/',loginPage, name='loginPage'),
     path('logout/',logoutPage, name='logoutPage'),
     path('register/',registerPage, name='registerPage'),
-    path('api/generate/<str:qrcode_name>/<str:qrcode_url>/',qr_code_api, name='qrCodeApi'),
+    path('api/generate/<str:qrcode_name>/<path:qrcode_url>/',qr_code_api, name='qrCodeApi'),
 ]
