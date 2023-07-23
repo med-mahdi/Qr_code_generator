@@ -3,49 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>QR CODE GENERATOR</title>
-        <style>
-            body {
-                font-family: sans-serif;
-            }
-            input {
-                margin-top: 10px;
-            }
-            button {
-                padding: 1em;
-                border-radius: 3px;
-                border: none;
-                color: white;
-                background-color: rgb(255, 0, 179);
-                margin-top: 10px;
-            }
-            form {
-                border: 1px solid #333333;
-                padding: 20px;
-            }
-            /* Qr Code Section */
-            section.qrcode {
-                border: 1px solid #333333;
-                margin-top: 1em;
-                padding: 20px;
-            }
-            section.qrcode .box{
-                border: 1px solid red;
-                display: inline-block;
-                padding: 10px;
-            }
-            section.qrcode > h2 {
-                color: rgb(36, 31, 34);
-            }
-            section.qrcode #qr_codename , #qr_codeurl{
-                font-size: 16px;
-                color: #333333e8;
-            }
-            section.qrcode #qrcode_img{
-                border: 2px solid #333333c5;
-                width: 200px;
-            }
-        </style>
+        <title>Document</title>
     </head>
     <body>
         <a href="/logout">Logout</a>
@@ -76,19 +34,55 @@
             {% endfor %}
         </section>
 
-
-        <!-- Script Tag Section -->
-        <script>
-            
-            var xhr = new XMLHttpRequest();
-            xhr.onload = function() {
-                var responseText = xhr.responseText;
-                console.log(responseText);
-            }            
-            xhr.open('GET','/api/mehdi/test.com')
-            xhr.send()
-
-
-        </script>
     </body>
 </html>
+<style>
+    body {
+        font-family: sans-serif;
+    }
+    input {
+        margin-top: 10px;
+    }
+    button {
+        padding: 1em;
+        border-radius: 3px;
+        border: none;
+        color: white;
+        background-color: rgb(255, 0, 179);
+        margin-top: 10px;
+    }
+
+    form {
+        border: 1px solid #333333;
+        padding: 20px;
+    }
+
+    /* Qr Code Section */
+    section.qrcode {
+        border: 1px solid #333333;
+        margin-top: 1em;
+        padding: 20px;
+    }
+
+    section.qrcode .box{
+        border: 1px solid red;
+        display: inline-block;
+        padding: 10px;
+    }
+
+
+    section.qrcode > h2 {
+        color: rgb(36, 31, 34);
+    }
+
+    section.qrcode #qr_codename , #qr_codeurl{
+        font-size: 16px;
+        color: #333333e8;
+    }
+
+    section.qrcode #qrcode_img{
+        border: 2px solid #333333c5;
+        width: 200px;
+    }
+
+</style>
