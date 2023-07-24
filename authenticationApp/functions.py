@@ -1,9 +1,5 @@
 from django.test import TestCase
 import re
-<<<<<<< HEAD
-=======
-
->>>>>>> adding-qrcode-api
 
 
 
@@ -15,14 +11,3 @@ def userCreationChecker(firstname , lastname ,email,password,password_conf):
     if (username_length and email and passwordLength and password_matching):
         return True
     return False
-
-
-
-<<<<<<< HEAD
-#> Function That Check if The Input_string parameter is a valid Url
-=======
-#> This Function Check If The String paramater is a valid url
->>>>>>> adding-qrcode-api
-def check_url_pattern(input_string):
-    url_pattern = r'^(https?:\/\/)?[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+(\/[a-zA-Z0-9_\-]+)*\/?$'
-    return re.match(url_pattern, input_string) is not None
